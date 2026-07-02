@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TraceNorth AI — Your Company's First AI Model. Trusted, Traceable, Fixed-Cost.</title>
+<meta name="description" content="TraceNorth AI builds your company's own AI model on top of a centralized data warehouse — answers you can trust, trace, and audit, with unlimited usage at a fixed cost. Self-hosted or cloud. Built in Sudbury by Mihir Trivedi.">
+<meta name="author" content="Mihir Trivedi">
+<meta property="og:title" content="TraceNorth AI — Your Company's First AI Model">
+<meta property="og:description" content="Traceable AI answers and automated reporting from your own business systems. Open-weight models, fixed cost, unlimited usage. Cloud or on-prem.">
+<style>
+:root{
+  --bg:#0b1020; --bg2:#0f1730; --panel:#141d3a; --panel2:#1a2547;
+  --line:rgba(255,255,255,.09);
+  --text:#e8ecf8; --muted:#9aa7c7; --dim:#6b7794;
+  --accent:#4fd1a5; --accent2:#5b9dff; --warn:#ffb454; --danger:#ff6b7a;
+  --grad:linear-gradient(135deg,#4fd1a5,#5b9dff);
+  --radius:14px; --maxw:1180px;
+  font-size:16px;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Roboto,Helvetica,Arial,sans-serif;line-height:1.6;-webkit-font-smoothing:antialiased}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px}
+section{padding:84px 0;border-bottom:1px solid var(--line)}
+h1{font-size:clamp(2.1rem,5vw,3.4rem);line-height:1.12;letter-spacing:-.02em}
+h2{font-size:clamp(1.6rem,3.4vw,2.3rem);line-height:1.2;letter-spacing:-.015em;margin-bottom:14px}
+h3{font-size:1.15rem;margin-bottom:8px}
+.kicker{display:inline-block;font-size:.78rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin-bottom:14px}
+.lead{color:var(--muted);font-size:1.08rem;max-width:820px}
+.grad{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+
+/* nav */
+nav{position:sticky;top:0;z-index:50;background:rgba(11,16,32,.85);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+nav .wrap{display:flex;align-items:center;justify-content:space-between;height:62px}
+.logo{font-weight:800;font-size:1.1rem;color:var(--text)}
+.logo span{color:var(--accent)}
+.navlinks{display:flex;gap:22px;font-size:.9rem}
+.navlinks a{color:var(--muted)}
+.navlinks a:hover{color:var(--text);text-decoration:none}
+@media(max-width:860px){.navlinks{display:none}}
+.cta{background:var(--grad);color:#08121f !important;font-weight:700;padding:9px 18px;border-radius:999px;font-size:.88rem}
+.cta:hover{text-decoration:none;filter:brightness(1.08)}
+
+/* hero */
+.hero{padding:110px 0 90px;border-bottom:1px solid var(--line);background:
+ radial-gradient(900px 420px at 80% -10%,rgba(91,157,255,.16),transparent),
+ radial-gradient(700px 380px at 10% 10%,rgba(79,209,165,.12),transparent)}
+.hero .tag{display:inline-block;border:1px solid var(--line);border-radius:999px;padding:6px 14px;font-size:.8rem;color:var(--muted);margin-bottom:22px}
+.hero p.sub{color:var(--muted);font-size:1.15rem;max-width:760px;margin:22px 0 30px}
+.hero .btns{display:flex;gap:14px;flex-wrap:wrap}
+.btn2{border:1px solid var(--line);color:var(--text);padding:11px 22px;border-radius:999px;font-size:.92rem}
+.btn2:hover{border-color:var(--accent);text-decoration:none}
+.statrow{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px;margin-top:56px}
+.stat{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:18px 20px}
+.stat b{display:block;font-size:1.5rem;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.stat small{color:var(--muted);font-size:.82rem;line-height:1.4;display:block;margin-top:4px}
+
+/* cards */
+.cards{display:grid;gap:18px;margin-top:34px}
+.cards.c3{grid-template-columns:repeat(auto-fit,minmax(290px,1fr))}
+.cards.c2{grid-template-columns:repeat(auto-fit,minmax(340px,1fr))}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:26px}
+.card:hover{border-color:rgba(79,209,165,.35)}
+.card .pill{display:inline-block;font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:4px 12px;border-radius:999px;margin-bottom:14px}
+.pill.g{background:rgba(79,209,165,.12);color:var(--accent)}
+.pill.b{background:rgba(91,157,255,.12);color:var(--accent2)}
+.pill.o{background:rgba(255,180,84,.12);color:var(--warn)}
+.pill.r{background:rgba(255,107,122,.12);color:var(--danger)}
+.card ul{list-style:none;margin-top:12px}
+.card ul li{padding:7px 0 7px 24px;position:relative;color:var(--muted);font-size:.94rem;border-bottom:1px dashed rgba(255,255,255,.05)}
+.card ul li:last-child{border-bottom:none}
+.card ul li::before{content:"—";position:absolute;left:0;color:var(--danger)}
+.card ul.offer li::before{content:"✓";color:var(--accent)}
+.card p{color:var(--muted);font-size:.95rem}
+
+/* architecture */
+.arch{background:var(--bg2);border:1px solid var(--line);border-radius:18px;padding:34px 26px;margin-top:38px;overflow-x:auto}
+.archgrid{display:grid;grid-template-columns:1fr 44px 1fr 44px 1.15fr 44px 1fr;gap:0;align-items:stretch;min-width:1020px}
+.archcol{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:20px 16px;display:flex;flex-direction:column}
+.archcol h4{font-size:.95rem;margin-bottom:4px}
+.archcol .sub{font-size:.75rem;color:var(--dim);margin-bottom:14px}
+.archcol.core{border-color:rgba(79,209,165,.5);box-shadow:0 0 40px rgba(79,209,165,.08)}
+.flow{display:flex;align-items:center;justify-content:center;color:var(--accent);font-size:1.3rem;position:relative}
+.flow small{position:absolute;top:calc(50% + 16px);font-size:.62rem;color:var(--dim);white-space:nowrap;letter-spacing:.05em}
+.logrow{display:flex;align-items:center;gap:10px;padding:8px 10px;border:1px solid var(--line);border-radius:10px;margin-bottom:8px;background:rgba(255,255,255,.02)}
+.logrow img{width:20px;height:20px;flex:none}
+.logrow .fb{width:20px;height:20px;flex:none;border-radius:5px;background:var(--grad);color:#08121f;font-size:.65rem;font-weight:800;display:none;align-items:center;justify-content:center}
+.logrow span{font-size:.82rem;color:var(--muted)}
+.logrow em{font-size:.66rem;color:var(--dim);font-style:normal;margin-left:auto;white-space:nowrap}
+.archnote{font-size:.8rem;color:var(--dim);margin-top:18px;max-width:900px}
+.brick{border:1px solid var(--line);border-radius:10px;padding:10px 12px;margin-bottom:8px;background:rgba(255,255,255,.02)}
+.brick b{display:block;font-size:.84rem}
+.brick small{color:var(--dim);font-size:.72rem;line-height:1.35;display:block}
+.brick.hl{border-color:rgba(79,209,165,.45);background:rgba(79,209,165,.05)}
+
+/* logo band */
+.logoband{display:flex;flex-wrap:wrap;gap:12px;margin-top:26px}
+.chiplogo{display:flex;align-items:center;gap:9px;border:1px solid var(--line);background:var(--panel);border-radius:999px;padding:8px 16px;font-size:.85rem;color:var(--muted)}
+.chiplogo img{width:18px;height:18px}
+.chiplogo .fb{width:18px;height:18px;border-radius:4px;background:var(--grad);color:#08121f;font-size:.6rem;font-weight:800;display:none;align-items:center;justify-content:center}
+
+/* tables */
+table{width:100%;border-collapse:collapse;margin-top:26px;font-size:.92rem}
+th,td{text-align:left;padding:13px 14px;border-bottom:1px solid var(--line);vertical-align:top}
+th{color:var(--dim);font-size:.75rem;text-transform:uppercase;letter-spacing:.09em;font-weight:700}
+td{color:var(--muted)}
+td b{color:var(--text)}
+.good{color:var(--accent);font-weight:700}
+.bad{color:var(--danger);font-weight:700}
+.tablewrap{overflow-x:auto;background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:6px 18px 14px}
+
+/* steps */
+.steps{counter-reset:step;display:grid;gap:16px;margin-top:34px;grid-template-columns:repeat(auto-fit,minmax(210px,1fr))}
+.step{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:22px;position:relative}
+.step::before{counter-increment:step;content:"0" counter(step);font-size:1.6rem;font-weight:800;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;display:block;margin-bottom:8px}
+.step p{color:var(--muted);font-size:.88rem}
+
+/* faq */
+details{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:18px 22px;margin-top:12px}
+details summary{cursor:pointer;font-weight:600;font-size:.98rem;list-style:none;position:relative;padding-right:28px}
+details summary::after{content:"+";position:absolute;right:0;top:0;color:var(--accent);font-size:1.2rem}
+details[open] summary::after{content:"–"}
+details p{color:var(--muted);margin-top:12px;font-size:.94rem}
+
+/* founder */
+.founder{display:grid;grid-template-columns:1.1fr 1fr;gap:36px;margin-top:34px}
+@media(max-width:860px){.founder{grid-template-columns:1fr}}
+.cred{display:flex;gap:14px;padding:14px 0;border-bottom:1px dashed rgba(255,255,255,.07)}
+.cred:last-child{border-bottom:none}
+.cred .ic{flex:none;width:38px;height:38px;border-radius:10px;background:rgba(79,209,165,.1);display:flex;align-items:center;justify-content:center;font-size:1.05rem}
+.cred b{display:block;font-size:.94rem}
+.cred small{color:var(--muted);font-size:.85rem;line-height:1.45;display:block}
+
+/* sources */
+.srcs{font-size:.82rem;color:var(--dim);line-height:1.9}
+.srcs a{color:var(--accent2)}
+
+footer{padding:52px 0;color:var(--dim);font-size:.85rem}
+footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:20px}
+
+.honest{border-left:3px solid var(--warn);background:rgba(255,180,84,.06);border-radius:0 var(--radius) var(--radius) 0;padding:18px 22px;margin-top:28px;font-size:.92rem;color:var(--muted)}
+.honest b{color:var(--warn)}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <a class="logo" href="#top">Trace<span>North</span> AI</a>
+    <div class="navlinks">
+      <a href="#pain">Pain Points</a>
+      <a href="#product">Product</a>
+      <a href="#architecture">Architecture</a>
+      <a href="#models">AI Models</a>
+      <a href="#cost">Cost</a>
+      <a href="#engagement">Engagement</a>
+      <a href="#founder">Founder</a>
+      <a href="#faq">FAQ</a>
+    </div>
+    <a class="cta" href="mailto:mtrivedi@laurentian.ca">Book a Discovery Call</a>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <div class="wrap">
+    <span class="tag">Sudbury, Ontario · Data Warehousing + Private AI · Cloud or On-Prem</span>
+    <h1>Your company's <span class="grad">first AI model.</span><br>Answers you can trust, trace, and afford.</h1>
+    <p class="sub">TraceNorth AI builds a centralized data warehouse from the business systems you already run, then deploys your own AI model on top of it. Ask questions in plain English, generate reports automatically, and get the <b>same answer for the same question, company-wide</b> — with every answer traceable back to the exact source data. Unlimited usage. Fixed cost. Your data never has to leave your walls.</p>
+    <div class="btns">
+      <a class="cta" href="mailto:mtrivedi@laurentian.ca">Start the Conversation</a>
+      <a class="btn2" href="#architecture">See the Architecture ↓</a>
+    </div>
+    <div class="statrow">
+      <div class="stat"><b>$8.2B</b><small>Enterprise LLM market in 2026 — SMEs are the fastest-growing segment</small></div>
+      <div class="stat"><b>30–40%</b><small>of regulated enterprise AI workloads projected on-prem/hybrid by 2027</small></div>
+      <div class="stat"><b>MIT-licensed</b><small>Open-weight frontier models (GLM-5.2, Qwen, Llama) now rival closed APIs</small></div>
+      <div class="stat"><b>$0 / query</b><small>Marginal inference cost once your model is deployed — no token bills</small></div>
+    </div>
+  </div>
+</header>
+
+<section id="pain">
+  <div class="wrap">
+    <span class="kicker">The Problem</span>
+    <h2>Every company has the data. Almost none can ask it a question.</h2>
+    <p class="lead">The pain looks different at every company size — but the root cause is identical: data lives in disconnected systems, answers depend on who you ask, and the AI tools on the market either can't reach your data or can't be trusted with it.</p>
+    <div class="cards c3">
+      <div class="card">
+        <span class="pill o">Small · 5–50 people</span>
+        <h3>"The numbers live in the owner's head."</h3>
+        <ul>
+          <li>Books in QuickBooks, sales in a spreadsheet, jobs in email — nothing talks to anything</li>
+          <li>No IT team, no data team, no one to even start an AI project</li>
+          <li>Per-seat AI subscriptions across staff outrun the software budget fast</li>
+          <li>ChatGPT answers from the internet — it knows nothing about <i>your</i> business</li>
+        </ul>
+      </div>
+      <div class="card">
+        <span class="pill b">Medium · 50–500 people</span>
+        <h3>"Monthly reporting takes a week of copy-paste."</h3>
+        <ul>
+          <li>Data scattered across ERP, CRM, accounting, and 50 spreadsheets</li>
+          <li>Someone rebuilds the same monthly report by hand, every month</li>
+          <li>Two departments answer the same question with two different numbers</li>
+          <li>Enterprise AI platforms are priced and built for firms 10× their size</li>
+        </ul>
+      </div>
+      <div class="card">
+        <span class="pill r">Large · 500+ people</span>
+        <h3>"We can't send that data to the cloud."</h3>
+        <ul>
+          <li>Operational data is sensitive, regulated, or safety-critical — cloud AI is off the table</li>
+          <li>Staff use ChatGPT anyway: ungoverned "shadow AI" with zero audit trail</li>
+          <li>Per-token API bills scale unpredictably — the more useful, the more expensive</li>
+          <li>When an AI answer drives a real decision, nobody can show where it came from</li>
+        </ul>
+      </div>
+    </div>
+    <div class="cards c3" style="margin-top:18px">
+      <div class="card" style="grid-column:1/-1;border-color:rgba(79,209,165,.4)">
+        <span class="pill g">What TraceNorth Offers</span>
+        <h3>One engagement, three outcomes — sized to where you are today</h3>
+        <ul class="offer">
+          <li><b>No warehouse yet?</b> We build your first centralized data warehouse from the systems you already use — then put your AI model on top of it.</li>
+          <li><b>Already have a warehouse?</b> We deploy and tune your AI model directly on it, and build the reporting automation around it.</li>
+          <li><b>Either way, you end up with:</b> a private AI that answers from your live data with sources cited, generates recurring reports automatically, gives the same governed answer to every user, and respects role-based access — deployed on your cloud or your own hardware.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="product">
+  <div class="wrap">
+    <span class="kicker">The Product</span>
+    <h2>Ask. Trace. Report. One engine, three capabilities.</h2>
+    <p class="lead">This is not "a chatbot." It is a governed answer layer over your own data — designed from day one so that every output can be audited, reproduced, and debugged.</p>
+    <div class="cards c3">
+      <div class="card">
+        <span class="pill g">Ask</span>
+        <h3>Scoped, source-cited answers</h3>
+        <p>Users pick the domain they're asking about — Finance, Sales, Operations, HR — and the AI answers <b>only</b> from the connected systems in that scope, with the source records cited on every answer. No internet guessing. No hallucinated numbers presented as fact.</p>
+      </div>
+      <div class="card">
+        <span class="pill b">Trace</span>
+        <h3>Same question → same answer, company-wide</h3>
+        <p>Recurring questions live in a versioned <b>answer registry</b>: one governed answer, regenerated from current data, with a logged trail of exactly which rows produced it and when it changed. If an answer looks wrong, you can debug it like code — not shrug at a black box. Role-based access controls decide who can see what.</p>
+      </div>
+      <div class="card">
+        <span class="pill o">Report</span>
+        <h3>Reports that write themselves</h3>
+        <p>Your monthly report becomes a live template. On schedule, the system pulls fresh data from every connected application, generates the report, and delivers it as <b>PDF, email, or dashboard</b> — humans review instead of assemble. Ad-hoc reports are one sentence away: "Give me Q2 sales by region as a PDF."</p>
+      </div>
+    </div>
+    <div class="honest"><b>Our honesty policy:</b> large language models are not deterministic by nature. "Same answer company-wide" is achieved by engineering, not magic — governed questions are versioned and served from the answer registry; ad-hoc questions always show their sources so they can be verified. We tell you exactly which is which. That discipline is the product.</div>
+  </div>
+</section>
+
+<section id="architecture">
+  <div class="wrap">
+    <span class="kicker">Architecture</span>
+    <h2>From the apps you already use to answers you can defend.</h2>
+    <p class="lead">Four layers. Your business applications stay exactly as they are — we connect to them, unify their data, and put your AI model on top.</p>
+
+    <div class="arch">
+      <div class="archgrid">
+
+        <div class="archcol">
+          <h4>1 · Your Business Apps</h4>
+          <div class="sub">Stay exactly as they are</div>
+          <div class="logrow"><img src="https://cdn.simpleicons.org/salesforce/9aa7c7" alt="" onerror="fb(this)"><span class="fb">S</span><span>Salesforce</span><em>CRM</em></div>
+          <div class="logrow"><img src="https://cdn.simpleicons.org/hubspot/9aa7c7" alt="" onerror="fb(this)"><span class="fb">H</span><span>HubSpot</span><em>CRM / Marketing</em></div>
+          <div class="logrow"><img src="https://cdn.simpleicons.org/quickbooks/9aa7c7" alt="" onerror="fb(this)"><span class="fb">Q</span><span>QuickBooks</span><em>Accounting</em></div>
+          <div class="logrow"><img src="https://cdn.simpleicons.org/xero/9aa7c7" alt="" onerror="fb(this)"><span class="fb">X</span><span>Xero</span><em>Accounting</em></div>
+          <div class="logrow"><img src="https://cdn.simpleicons.org/sap/9aa7c7" alt="" onerror="fb(this)"><span class="fb">S</span><span>SAP</span><em>ERP</em></div>
+          <div class="logrow"><img src="https://cdn.simpleicons.org/shopify/9aa7c7" alt="" onerror="fb(this)"><span class="fb">S</span><span>Shopify</span><em>E-commerce</em></div>
+          <div class="logrow"><img src="https://cdn.simpleicons.org/stripe/9aa7c7" alt="" onerror="fb(this)"><span class="fb">S</span><span>Stripe</span><em>Payments</em></div>
+          <div class="logrow"><img src="https://cdn.simpleicons.org/jira/9aa7c7" alt="" onerror="fb(this)"><span class="fb">J</span><span>Jira</span><em>Projects</em></div>
+          <div class="logrow"><img src="https://cdn.simpleicons.org/zendesk/9aa7c7" alt="" onerror="fb(this)"><span class="fb">Z</span><span>Zendesk</span><em>Support</em></div>
+          <div class="logrow"><img src="https://cdn.simpleicons.org/googlesheets/9aa7c7" alt="" onerror="fb(this)"><span class="fb">G</span><span>Sheets / Excel</span><em>Spreadsheets</em></div>
+          <div class="logrow"><span class="fb" style="display:flex">＋</span><span>Microsoft 365, Workday, ADP, …</span><em>via API</em></div>
+        </div>
+
+        <div class="flow">→<small>APIs · exports</small></div>
+
+        <div class="archcol">
+          <h4>2 · Pipelines + Warehouse</h4>
+          <div class="sub">One source of truth</div>
+          <div class="brick"><b>ETL / ELT pipelines</b><small>Scheduled sync from every app — incremental, logged, monitored</small></div>
+          <div class="logrow"><img src="https://cdn.simpleicons.org/apacheairflow/9aa7c7" alt="" onerror="fb(this)"><span class="fb">A</span><span>Airflow</span><em>orchestration</em></div>
+          <div class="logrow"><img src="https://cdn.simpleicons.org/dbt/9aa7c7" alt="" onerror="fb(this)"><span class="fb">d</span><span>dbt</span><em>transformation</em></div>
+          <div class="brick hl"><b>Centralized Data Warehouse</b><small>Modelled, documented, governed — yours forever, AI or not</small></div>
+          <div class="logrow"><img src="https://cdn.simpleicons.org/postgresql/9aa7c7" alt="" onerror="fb(this)"><span class="fb">P</span><span>PostgreSQL</span><em>default</em></div>
+          <div class="logrow"><img src="https://cdn.simpleicons.org/mongodb/9aa7c7" alt="" onerror="fb(this)"><span class="fb">M</span><span>MongoDB</span><em>documents</em></div>
+          <div class="logrow"><img src="https://cdn.simpleicons.org/snowflake/9aa7c7" alt="" onerror="fb(this)"><span class="fb">S</span><span>Snowflake</span><em>if you have it</em></div>
+          <div class="logrow"><img src="https://cdn.simpleicons.org/mysql/9aa7c7" alt="" onerror="fb(this)"><span class="fb">M</span><span>MySQL / SQL Server</span><em>existing DBs</em></div>
+        </div>
+
+        <div class="flow">→<small>governed data</small></div>
+
+        <div class="archcol core">
+          <h4>3 · Your AI Model <span style="color:var(--accent)">★</span></h4>
+          <div class="sub">Open-weight · private · fixed-cost</div>
+          <div class="brick hl"><b>Open-weight LLM</b><small>GLM-5.2 · Llama · Qwen · Mistral — sized to your hardware, tuned to your data and vocabulary</small></div>
+          <div class="brick"><b>Retrieval layer (RAG)</b><small>Every answer grounded in warehouse rows + your documents — never model memory alone</small></div>
+          <div class="brick hl"><b>Answer registry</b><small>Governed questions → versioned answers with full data lineage. Same answer for every user. Debuggable.</small></div>
+          <div class="brick"><b>Role-based access control</b><small>Finance sees finance. HR sees HR. Every query logged per user.</small></div>
+          <div class="brick"><b>Report engine</b><small>Scheduled + on-demand generation → PDF, email, dashboard</small></div>
+          <div class="brick"><b>Automation pipelines</b><small>Alerts, approvals, email digests — triggered by your data</small></div>
+        </div>
+
+        <div class="flow">→<small>answers + reports</small></div>
+
+        <div class="archcol">
+          <h4>4 · Your People</h4>
+          <div class="sub">Any device, any role</div>
+          <div class="brick hl"><b>Chat — scoped by domain</b><small>"Which customers are overdue &gt;60 days?" → answer + source records</small></div>
+          <div class="brick"><b>Scheduled reports</b><small>Monthly ops report lands as PDF, on time, assembled by no one</small></div>
+          <div class="brick"><b>Dashboards</b><small>Live KPIs — or feeds into your existing Power BI / Tableau</small></div>
+          <div class="brick"><b>Email &amp; alerts</b><small>"Inventory below reorder point" arrives before it's a problem</small></div>
+          <div class="brick"><b>Audit view</b><small>Every answer: who asked, what data, which model version</small></div>
+        </div>
+
+      </div>
+      <p class="archnote"><b>Deploy anywhere:</b> the entire stack ships as containers — on <b>AWS, Google Cloud, or Microsoft Azure</b> in your own account, or fully <b>on-premise</b> on a single GPU server for air-gapped environments. Same product either way. All third-party marks belong to their owners; shown to indicate integration targets.</p>
+    </div>
+
+    <div class="logoband">
+      <span class="chiplogo"><img src="https://cdn.simpleicons.org/googlecloud/9aa7c7" alt="" onerror="fb(this)"><span class="fb">G</span>Google Cloud</span>
+      <span class="chiplogo"><span class="fb" style="display:flex">A</span>Amazon Web Services</span>
+      <span class="chiplogo"><span class="fb" style="display:flex">Az</span>Microsoft Azure</span>
+      <span class="chiplogo"><img src="https://cdn.simpleicons.org/docker/9aa7c7" alt="" onerror="fb(this)"><span class="fb">D</span>Docker</span>
+      <span class="chiplogo"><img src="https://cdn.simpleicons.org/kubernetes/9aa7c7" alt="" onerror="fb(this)"><span class="fb">K</span>Kubernetes</span>
+      <span class="chiplogo"><img src="https://cdn.simpleicons.org/ollama/9aa7c7" alt="" onerror="fb(this)"><span class="fb">O</span>Ollama / vLLM</span>
+      <span class="chiplogo"><img src="https://cdn.simpleicons.org/huggingface/9aa7c7" alt="" onerror="fb(this)"><span class="fb">H</span>Hugging Face</span>
+      <span class="chiplogo"><span class="fb" style="display:flex">🔒</span>On-Premise / Air-gapped</span>
+    </div>
+  </div>
+</section>
+
+<section id="models">
+  <div class="wrap">
+    <span class="kicker">The AI — Verified, July 2026</span>
+    <h2>Open-weight models caught up. That changes the economics.</h2>
+    <p class="lead">This is not a bet on second-rate AI. In June 2026, Z.ai released <b>GLM-5.2</b> under the MIT license — a 753B-parameter open-weight model that independent benchmarks now rank the top open model, within a point of the best closed frontier models on agentic coding benchmarks. It joins Qwen 3.5, DeepSeek V4, Llama 4, and Mistral: genuinely frontier-class AI you can download, own, and run on your own hardware — legally, with zero royalties.</p>
+    <div class="tablewrap">
+      <table>
+        <tr><th>Deployment tier</th><th>Typical company</th><th>Model class (examples)</th><th>Hardware</th><th>What it handles</th></tr>
+        <tr><td><b>Starter</b></td><td>Small business, single team</td><td>Qwen / Gemma / Llama, 8–32B</td><td>One GPU workstation or small cloud instance</td><td>Q&amp;A over warehouse + docs, scheduled reports, email automation</td></tr>
+        <tr><td><b>Growth</b></td><td>Mid-size, multi-department</td><td>Qwen 3.5 / Llama 4 / GLM-Air class, 30–110B</td><td>1–2 GPU server (or cloud GPU in your account)</td><td>Everything above + multi-domain scoping, RBAC, answer registry, fine-tuned company vocabulary</td></tr>
+        <tr><td><b>Enterprise</b></td><td>Large / regulated operations</td><td>GLM-5.2 · DeepSeek V4 · Qwen 3.5 flagship (MoE)</td><td>Multi-GPU node or dedicated cloud cluster</td><td>Full platform, high concurrency, air-gapped option, compliance audit trail</td></tr>
+      </table>
+    </div>
+    <div class="honest"><b>What we won't tell you:</b> that a 753B model runs on a laptop. Right-sizing is the engineering: most SMB workloads run beautifully on a 8–70B model on one GPU. You buy the tier your questions need — and can upgrade the model later without changing anything else, because the model is a swappable component, not the product.</div>
+  </div>
+</section>
+
+<section id="cost">
+  <div class="wrap">
+    <span class="kicker">The Economics</span>
+    <h2>Fixed cost. Unlimited questions. No token meter.</h2>
+    <p class="lead">Every cloud AI product bills per token or per seat — meaning cost scales with usage, and the more useful the tool becomes, the bigger the bill. A private model inverts this: after deployment, the marginal cost of a query is effectively zero.</p>
+    <div class="tablewrap">
+      <table>
+        <tr><th></th><th>Cloud AI APIs (OpenAI / Google / Anthropic)</th><th>Your TraceNorth model</th></tr>
+        <tr><td><b>Cost model</b></td><td><span class="bad">Per token / per seat</span> — grows with every query, unpredictable at scale</td><td><span class="good">Fixed</span> — hardware + support, known on day one, unlimited internal usage</td></tr>
+        <tr><td><b>Your data</b></td><td>Leaves your network, processed on vendor infrastructure</td><td><span class="good">Never leaves</span> your cloud account or your building</td></tr>
+        <tr><td><b>Traceability</b></td><td>Opaque — no lineage from answer to source data</td><td><span class="good">Full lineage</span> — every answer traceable to warehouse rows</td></tr>
+        <tr><td><b>Consistency</b></td><td>Different phrasing, different day → different answer</td><td><span class="good">Governed answers</span> — versioned registry, same answer company-wide</td></tr>
+        <tr><td><b>Access control</b></td><td>Coarse, per-workspace</td><td><span class="good">Role-based</span> — per-domain, per-user, fully logged</td></tr>
+        <tr><td><b>Vendor lock-in</b></td><td>Model, price, and terms can change under you</td><td><span class="good">You own it</span> — MIT/Apache-licensed models, open standards, portable stack</td></tr>
+        <tr><td><b>Offline / air-gapped</b></td><td>Impossible</td><td><span class="good">Supported</span> — proven in underground mining environments</td></tr>
+      </table>
+    </div>
+    <p class="archnote" style="margin-top:16px"><b>The honest fine print:</b> "fixed" is not "free." A GPU server, electricity, and a support agreement are real costs — but they are flat, budgetable, and independent of how many questions your team asks. For a team of 50 using AI daily, that trade wins quickly; we'll model your break-even in the discovery call.</p>
+  </div>
+</section>
+
+<section id="engagement">
+  <div class="wrap">
+    <span class="kicker">How We Work</span>
+    <h2>From scattered data to your own AI model in five phases.</h2>
+    <div class="steps">
+      <div class="step"><h3>Assess</h3><p>Map your systems, data, reporting pain, and access rules. Pick the highest-value first use case — usually one painful recurring report.</p></div>
+      <div class="step"><h3>Unify</h3><p>Build (or connect to) your centralized warehouse. Pipelines from every source system, modelled and documented with dbt.</p></div>
+      <div class="step"><h3>Deploy</h3><p>Stand up your AI model — right-sized, on your cloud or on-prem — grounded in the warehouse via retrieval, with RBAC wired to your roles.</p></div>
+      <div class="step"><h3>Automate</h3><p>Turn recurring reports into live templates. Wire alerts, email digests, and approval flows. Seed the answer registry with your governed questions.</p></div>
+      <div class="step"><h3>Handoff</h3><p>Your team owns a documented, open-standard stack. We stay on a support agreement — or you run it yourself. No lock-in, by design.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="founder">
+  <div class="wrap">
+    <span class="kicker">Who's Behind This</span>
+    <h2>I've already built this once — inside a company. Now it's a product.</h2>
+    <div class="founder">
+      <div>
+        <p class="lead" style="margin-bottom:18px"><b>Mihir Trivedi</b> — Senior Software Engineer, 8+ years across healthcare, mining, e-commerce, and the public sector. Sudbury, Ontario.</p>
+        <p style="color:var(--muted);font-size:.96rem">TraceNorth isn't a concept I read about. At Flosonics Medical I architected the company's centralized data warehouse (PostgreSQL + dbt) unifying Finance, QA, Production, and HR — then built the enterprise AI assistant on top of it that let non-technical staff query device logs, sales, and HR documents in plain English, cutting manual reporting overhead by 40%. That system used paid APIs. TraceNorth is the same proven architecture, rebuilt on open-weight models so the customer owns it — with the traceability layer those tools never had.</p>
+        <p style="color:var(--muted);font-size:.96rem;margin-top:14px">It's a solo-founder journey by design at this stage: one senior engineer with modern AI tooling now ships what used to take a team — and my delivery record proves it.</p>
+      </div>
+      <div>
+        <div class="cred"><div class="ic">🏥</div><div><b>Flosonics Medical — BI Developer</b><small>Built the exact product pattern: enterprise warehouse (PostgreSQL/dbt) + AI assistant over Salesforce, HubSpot &amp; device data. −40% reporting overhead.</small></div></div>
+        <div class="cred"><div class="ic">⛏️</div><div><b>LoopX &amp; Minax (Vale) — Mining software</b><small>Built LoopX's real-time mining safety platform and Vale's offline-first underground inspection app. AI in harsh, disconnected environments is home turf.</small></div></div>
+        <div class="cred"><div class="ic">🏛️</div><div><b>City of Greater Sudbury — BI Analyst</b><small>Mission-critical 911 and public-health data integration; data governance training for end users.</small></div></div>
+        <div class="cred"><div class="ic">🎓</div><div><b>Laurentian University — M.Sc. Computational Science</b><small>Published ML research (Ore Geology Reviews); presented at Harvard Faculty Club.</small></div></div>
+        <div class="cred"><div class="ic">📜</div><div><b>Certified</b><small>Salesforce Agentforce Specialist (AI-201) · Azure Fundamentals · Power BI Data Analyst · Power Platform Developer.</small></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="faq">
+  <div class="wrap">
+    <span class="kicker">FAQ</span>
+    <h2>The questions everyone asks.</h2>
+    <details open><summary>Is this just ChatGPT connected to my files?</summary><p>No — three differences. Your model runs privately (your cloud or your hardware), so data never leaves your control. Every answer is grounded in your governed warehouse and cites its sources. And recurring questions are versioned in an answer registry, so the whole company gets one consistent, auditable answer — not whatever the model felt like saying today.</p></details>
+    <details><summary>Do you actually train a model from scratch for us?</summary><p>No, and nobody should sell you that. "Your company's AI model" means: an open-weight foundation model (MIT/Apache licensed) deployed privately for you, grounded in your data through retrieval, optionally fine-tuned on your vocabulary and documents. You get the ownership benefits without the eight-figure training bill.</p></details>
+    <details><summary>Are open-source models actually good enough?</summary><p>In 2026, yes — verifiably. GLM-5.2 (MIT license, June 2026) benchmarks within a point of the best closed models on demanding agentic tasks; Qwen, DeepSeek, and Llama fill out every size tier. For grounded Q&amp;A and report generation over structured company data — the core of this product — right-sized open models are more than sufficient, and they improve every quarter at no cost to you.</p></details>
+    <details><summary>What does it cost?</summary><p>A one-time build (assessment, warehouse, deployment, automation) plus a flat annual support agreement. Hardware is either your cloud account or a GPU server you own. What you never pay: per-token fees, per-seat fees, or a bill that grows because your team used the tool more. We model your break-even against API pricing in the discovery call.</p></details>
+    <details><summary>We already have a data warehouse. Do we start over?</summary><p>No — that's the best starting position. We connect the AI layer directly to your existing warehouse (Snowflake, PostgreSQL, SQL Server, BigQuery…), add the retrieval, registry, RBAC, and reporting layers on top, and skip straight to deployment.</p></details>
+    <details><summary>Can it really run with no internet?</summary><p>Yes. The stack is proven in the most disconnected environment there is: underground mining. Our OreAcle proof-of-concept runs live sensor ingest, ML anomaly detection, and a local-LLM copilot fully offline. Your office is an easier problem.</p></details>
+    <details><summary>Who sees what? We have confidential data.</summary><p>Role-based access control is built into the retrieval layer itself — the model physically cannot retrieve data outside the asking user's scope. Every query is logged: who asked, what was retrieved, which model version answered. That log is your audit trail.</p></details>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <span class="kicker">Verified Claims</span>
+    <h2>We cite our sources. It's kind of our whole thing.</h2>
+    <p class="srcs">
+      GLM-5.2 release, MIT license, benchmarks: <a href="https://www.tomshardware.com/tech-industry/artificial-intelligence/z-ai-free-glm-5-2-tops-the-open-weight-ai-rankings-on-all-huawei-silicon">Tom's Hardware</a> · <a href="https://www.cnbc.com/2026/06/26/china-zhipu-z-ai-open-source-anthropic-openai.html">CNBC</a> · <a href="https://www.technology.org/2026/07/02/zhipus-glm-5-2-rivals-opus-4-8-on-coding-benchmarks-at-a-fifth-of-the-cost/">Technology.org</a><br>
+      Open-weight model landscape &amp; licensing: <a href="https://huggingface.co/blog/daya-shankar/open-source-llms">Hugging Face</a> · <a href="https://benchlm.ai/blog/posts/best-open-source-llm">BenchLM</a><br>
+      Enterprise LLM market size &amp; SME growth: <a href="https://www.gminsights.com/industry-analysis/enterprise-llm-market">Global Market Insights</a> · <a href="https://www.fortunebusinessinsights.com/enterprise-llm-market-114178">Fortune Business Insights</a><br>
+      On-prem / sovereign AI trend: <a href="https://www.useluminix.com/reports/industry-analysis/ai-on-premise-future/source/0">Luminix industry analysis</a> · <a href="https://www.weforum.org/stories/2026/01/how-agentic-physical-and-sovereign-ai-are-rewriting-the-rules-of-enterprise-innovation/">World Economic Forum</a>
+    </p>
+  </div>
+</section>
+
+<section style="border-bottom:none;text-align:center">
+  <div class="wrap">
+    <h2>Your data already knows the answers.<br><span class="grad">Let's build the AI that can find them.</span></h2>
+    <p class="lead" style="margin:18px auto 30px">One discovery call. We'll map your systems, pick the report that hurts most, and show you what your first AI model would look like.</p>
+    <a class="cta" style="font-size:1rem;padding:13px 30px" href="mailto:mtrivedi@laurentian.ca">mtrivedi@laurentian.ca</a>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div><b style="color:var(--text)">Trace<span style="color:var(--accent)">North</span> AI</b><br>Centralized data warehousing + private, traceable AI.<br>Sudbury, Ontario, Canada.</div>
+    <div>Founder: Mihir Trivedi<br><a href="https://mihirtrivedi.tech">mihirtrivedi.tech</a> · <a href="https://linkedin.com/in/mihirtrivedigm">LinkedIn</a><br>Proof of concept: <a href="https://mtrivedilu.github.io/OreAcle/">OreAcle (offline mining AI)</a></div>
+    <div style="max-width:340px">All product names and logos are trademarks of their respective owners, shown solely to indicate integration targets. TraceNorth AI is not affiliated with or endorsed by any of them.</div>
+  </div>
+</footer>
+
+<script>
+function fb(img){img.style.display='none';var s=img.nextElementSibling;if(s&&s.classList.contains('fb')){s.style.display='flex';s.textContent=s.textContent||'•';}}
+</script>
+</body>
+</html>
